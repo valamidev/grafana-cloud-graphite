@@ -35,10 +35,10 @@ export class GraphiteHTTP {
       })
     );
 
-    return await this.HttpSend(metricsToSend);
+    return await this.HttpSend(JSON.stringify(data));
   }
 
-  private async HttpSend(data: MetricSchemaRaw[], retry = 0): Promise<void> {
+  private async HttpSend(payload: string, retry = 0): Promise<void> {
     if (retry > 3) {
       throw new Error(
         `Failed to send metrics after ${this.retryLimit} retries`
@@ -52,7 +52,7 @@ export class GraphiteHTTP {
           Authorization: `Bearer ${this.authToken}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: payload,
       });
 
       if (!response.ok) {
@@ -61,7 +61,7 @@ export class GraphiteHTTP {
     } catch (error) {
       await sleep(Math.pow(2, retry) * this.retryDelay);
 
-      return this.HttpSend(data, retry + 1);
+      return this.HttpSend(payload, retry + 1);
     }
   }
 }
