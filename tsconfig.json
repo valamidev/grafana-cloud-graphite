@@ -22,5 +22,5 @@
       "emitDecoratorMetadata": true,
       "incremental": true,                           
   },
-  "exclude": ["node_modules", "__test__", "examples"]
+  "exclude": ["node_modules", "__test__", "dist", "examples"]
   }

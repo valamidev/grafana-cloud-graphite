@@ -1,5 +1,6 @@
 import {
   Counter,
+  Gauge,
   GraphiteMetricsOptions,
   IntervalMetrics,
   MetricSchema,
@@ -7,6 +8,7 @@ import {
 import { GraphiteHTTP } from "./httpHandler";
 import { GraphiteCounter } from "./metricTypes/counter";
 import EventEmitter from "events";
+import { GraphiteGauge } from "./metricTypes/gauge";
 
 export class GraphiteMetrics extends EventEmitter {
   private readonly httpHandler: GraphiteHTTP;
@@ -19,7 +21,7 @@ export class GraphiteMetrics extends EventEmitter {
     this.httpHandler = new GraphiteHTTP({ ...this.options });
   }
 
-  registerCounter(
+  public registerCounter(
     name: string,
     interval: number,
     tags?: Record<string, string>
@@ -35,7 +37,23 @@ export class GraphiteMetrics extends EventEmitter {
     return metrics;
   }
 
-  stop(): void {
+  public registerGauge(
+    name: string,
+    interval: number,
+    tags?: Record<string, string>
+  ): Gauge {
+    const metrics = new GraphiteGauge(
+      this.options.namespace ? `${this.options.namespace}.${name}` : name,
+      interval,
+      tags
+    );
+
+    this.registerMetric(metrics, interval);
+
+    return metrics;
+  }
+
+  public stop(): void {
     this.intervalHandlers.forEach((interval) => {
       clearInterval(interval);
     });
