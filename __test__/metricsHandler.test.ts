@@ -1,4 +1,5 @@
 import { GraphiteMetrics } from "../src/handlers/metricsHandler";
+import { sleep } from "../src/utils";
 
 describe("GraphiteMetrics", () => {
   let graphiteMetrics: GraphiteMetrics;
@@ -9,6 +10,8 @@ describe("GraphiteMetrics", () => {
       token: "test",
       userId: "test",
       namespace: "namespace",
+      retryDelay: 10,
+      retryLimit: 3,
     });
   });
 
@@ -38,4 +41,25 @@ describe("GraphiteMetrics", () => {
     expect((counter as any).interval).toBe(1000);
     expect((counter as any).tags).toEqual({ tag1: "value1", tag2: "value2" });
   });
+
+  it("should throw Error when send metric ", async () => {
+    const counter = graphiteMetrics.registerCounter("test.counter", 1000, {
+      tag1: "value1",
+      tag2: "value2",
+    });
+
+    counter.inc();
+
+    let errors: any[] = [];
+
+    graphiteMetrics.on("error", (error: any) => {
+      errors.push(error.message);
+    });
+
+    await sleep(2000);
+
+    expect(counter).toBeDefined();
+    expect(errors.length).toBe(1);
+    expect(errors[0]).toBe("Failed to send metrics after 3 retries");
+  }, 8000);
 });
