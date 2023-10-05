@@ -30,7 +30,7 @@ export interface IntervalMetrics {
 }
 
 export interface Counter extends IntervalMetrics {
-  inc(): void;
+  inc(value?: number): void;
 }
 
 export interface Gauge extends IntervalMetrics {

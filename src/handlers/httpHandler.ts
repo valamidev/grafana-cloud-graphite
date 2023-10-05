@@ -35,14 +35,18 @@ export class GraphiteHTTP {
       })
     );
 
-    return await this.HttpSend(JSON.stringify(data));
+    return await this.HttpSend(
+      JSON.stringify(metricsToSend, (key, value) => {
+        if (value !== undefined) return value;
+      })
+    );
   }
 
   private async HttpSend(payload: string, retry = 0): Promise<void> {
-    if (retry > 3) {
-      throw new Error(
-        `Failed to send metrics after ${this.retryLimit} retries`
-      );
+    let canRetry = true;
+
+    if (retry > this.retryLimit) {
+      canRetry = false;
     }
 
     try {
@@ -55,10 +59,23 @@ export class GraphiteHTTP {
         body: payload,
       });
 
+      if ([401, 403, 404].includes(response.status)) {
+        canRetry = false;
+        throw new Error(
+          `Failed to send metrics, invalid URL ${response.status} - ${response.statusText}`
+        );
+      }
+
       if (!response.ok) {
-        throw new Error(`Failed to send metrics: ${response.statusText}`);
+        throw new Error(
+          `Failed to send metrics: ${response.status} - ${response.statusText}`
+        );
       }
     } catch (error) {
+      if (canRetry === false) {
+        throw error;
+      }
+
       await sleep(Math.pow(2, retry) * this.retryDelay);
 
       return this.HttpSend(payload, retry + 1);
