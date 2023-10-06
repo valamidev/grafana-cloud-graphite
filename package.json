@@ -1,7 +1,12 @@
 {
     "name": "grafana-cloud-graphite",
-    "version": "0.2.0",
-    "description": "",
+    "version": "0.2.1",
+    "description": "NodeJS client for Grafana Cloud Graphite API",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/valamidev/grafana-cloud-graphite.git"
+      },
+      "homepage": "https://github.com/valamidev/grafana-cloud-graphite#readme",
     "main": "dist/src/index.js",
     "engines": {
         "node": ">=16"
@@ -18,10 +23,9 @@
         "graphite",
         "metrics"
     ],
-    "author": "",
-    "license": "ISC",
+    "author": "Valamidev",
+    "license": "MIT",
     "dependencies": {
-        "axios": "^0.27.2",
         "node-fetch": "^2.7.0"
     },
     "devDependencies": {
