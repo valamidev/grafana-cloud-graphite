@@ -6,7 +6,7 @@ describe("GraphiteMetrics", () => {
 
   beforeEach(() => {
     graphiteMetrics = new GraphiteMetrics({
-      ingestEndpointURL: "localhost",
+      ingestEndpointURL: "https://google.com",
       token: "test",
       userId: "test",
       namespace: "namespace",
@@ -60,6 +60,6 @@ describe("GraphiteMetrics", () => {
 
     expect(counter).toBeDefined();
     expect(errors.length).toBe(1);
-    expect(errors[0]).toBe("Failed to send metrics after 3 retries");
+    expect(errors[0]).toContain("Failed to send metrics:");
   }, 8000);
 });

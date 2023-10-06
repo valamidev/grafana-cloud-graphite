@@ -1,6 +1,6 @@
 {
     "name": "grafana-cloud-graphite",
-    "version": "0.1.7",
+    "version": "0.2.0",
     "description": "",
     "main": "dist/src/index.js",
     "engines": {
