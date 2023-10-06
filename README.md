@@ -1,4 +1,4 @@
-# Grafana Cloud Graphite Metrics Handler
+# Grafana Cloud Graphite Metrics Client
 
 This package provides a simple way to send metrics to a Grafana Cloud Graphite server. It includes support for counters and interval metrics.
 
