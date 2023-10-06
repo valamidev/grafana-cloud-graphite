@@ -31,20 +31,21 @@ import { GraphiteMetrics } from "graphite-metrics-handler";
 Then, create a new instance of the class with your Graphite server options:
 
 ```javascript
-const metrics = new GraphiteMetrics({
-  ingestEndpointURL: "https://something.grafana.net/graphite/metrics",
+const Metrics = new GraphiteMetrics({
   userId: "5435231"; // Grafana Graphite UserId
   token: "glc_kyupkp..."; // Grafana Access Token
-  namespace: "myapp", // optional
+  ingestEndpointURL:  "https://something.grafana.net/graphite/metrics",
+  namespace: "e2e",
 });
+
 ```
 
 You can then register counters and interval metrics with the `registerCounter` method:
 
 ```javascript
 // Register a counter metric with 60.000ms (1 minute) reporting interval
-const dbCounterAll = metrics.registerCounter("db.query.all", 60000);
-const dbCounterError = metrics.registerCounter("db.query.error", 60000);
+const dbCounterAll = Metrics.registerCounter("db.query.all", 60000);
+const dbCounterError = Metrics.registerCounter("db.query.error", 60000);
 ```
 
 Use counter example:
@@ -63,8 +64,12 @@ try {
 To stop reporting metrics / clearIntervals, call the stop method:
 
 ```javascript
-metrics.stop();
+Metrics.stop();
 ```
+
+### Use metrics on Grafana Dashboard
+
+![Dashboard Screenshot Example](./docs/dashboardscreenshot.png)
 
 ### License
 
