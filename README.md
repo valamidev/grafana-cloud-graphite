@@ -32,8 +32,8 @@ Then, create a new instance of the class with your Graphite server options:
 
 ```javascript
 const Metrics = new GraphiteMetrics({
-  userId: "5435231"; // Grafana Graphite UserId
-  token: "glc_kyupkp..."; // Grafana Access Token
+  userId: "5435231", // Grafana Graphite UserId
+  token: "glc_kyupkp...", // Grafana Access Token
   ingestEndpointURL:  "https://something.grafana.net/graphite/metrics",
   namespace: "e2e",
 });
