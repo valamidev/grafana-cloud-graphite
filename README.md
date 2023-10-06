@@ -9,7 +9,7 @@ Provide easy use for: https://grafana.com/docs/grafana-cloud/monitor-infrastruct
 To install this package, use npm:
 
 ```bash
-npm install graphite-metrics-handler
+npm i grafana-cloud-graphite
 ```
 
 ### Requirements
