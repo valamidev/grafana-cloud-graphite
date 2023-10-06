@@ -38,6 +38,10 @@ const Metrics = new GraphiteMetrics({
   namespace: "e2e",
 });
 
+// Handle/Listen Metrics error
+ Metrics.on("error", (err) => {
+    console.error(err);
+  });
 ```
 
 You can then register counters and interval metrics with the `registerCounter` method:
