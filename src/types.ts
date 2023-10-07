@@ -38,6 +38,10 @@ export interface Gauge extends IntervalMetrics {
   dec(value?: number): void;
 }
 
+export interface Stats extends IntervalMetrics {
+  add(value?: number): void;
+}
+
 export interface Histogram extends IntervalMetrics {
   value(value?: number): void;
 }
