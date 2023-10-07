@@ -25,7 +25,7 @@ npm i grafana-cloud-graphite
 To use this package, first import the GraphiteMetrics class:
 
 ```javascript
-import { GraphiteMetrics } from "graphite-metrics-handler";
+import { GraphiteMetrics } from "grafana-cloud-graphite";
 ```
 
 Then, create a new instance of the class with your Graphite server options:
@@ -34,14 +34,14 @@ Then, create a new instance of the class with your Graphite server options:
 const Metrics = new GraphiteMetrics({
   userId: "5435231", // Grafana Graphite UserId
   token: "glc_kyupkp...", // Grafana Access Token
-  ingestEndpointURL:  "https://something.grafana.net/graphite/metrics",
+  ingestEndpointURL: "https://something.grafana.net/graphite/metrics",
   namespace: "e2e",
 });
 
 // Handle/Listen Metrics error
- Metrics.on("error", (err) => {
-    console.error(err);
-  });
+Metrics.on("error", (err) => {
+  console.error(err);
+});
 ```
 
 You can then register counters and interval metrics with the `registerCounter` method:
