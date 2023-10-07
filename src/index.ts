@@ -1,2 +1,8 @@
 export * from "./handlers/metricsHandler";
-export { GraphiteMetricsOptions, Counter, Gauge, Histogram } from "./types";
+export {
+  GraphiteMetricsOptions,
+  Counter,
+  Gauge,
+  Stats,
+  Histogram,
+} from "./types";
