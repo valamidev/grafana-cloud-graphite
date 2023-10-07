@@ -71,6 +71,29 @@ To stop reporting metrics / clearIntervals, call the stop method:
 Metrics.stop();
 ```
 
+### Additional Metrics types
+
+```javascript
+// Register a counter metric with 60.000ms (1 minute) reporting interval
+const dbQueryTime = Metrics.registerStats("db.query.time", 60000);
+
+dbCounterTime.add(100);
+dbCounterTime.add(100);
+dbCounterTime.add(200);
+/* Result:
+db.query.time.min: 100, 
+db.query.time.max: 200, 
+db.query.time.avg: 133
+db.query.time.median: 100
+*/
+
+const gauge = Metrics.registerGauge("any.gauge", 60000);
+
+gauge.inc(100);
+gauge.dec(50);
+// Result any.gauge: 50
+```
+
 ### Use metrics on Grafana Dashboard
 
 ![Dashboard Screenshot Example](./docs/dashboardscreenshot.png)
