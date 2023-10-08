@@ -2,7 +2,8 @@
 
 This package provides a simple way to send metrics to a Grafana Cloud Graphite server. It includes support for counters and interval metrics.
 
-Provide easy use for: https://grafana.com/docs/grafana-cloud/monitor-infrastructure/metrics/metrics-graphite/http-api/
+#### Provide easy use for: 
+https://grafana.com/docs/grafana-cloud/monitor-infrastructure/metrics/metrics-graphite/http-api/
 
 ### Installation
 
