@@ -2,8 +2,13 @@
 
 This package provides a simple way to send metrics to a Grafana Cloud Graphite server. It includes support for counters and interval metrics.
 
-#### Provide easy use for: 
+#### Provide easy use for:
+
 https://grafana.com/docs/grafana-cloud/monitor-infrastructure/metrics/metrics-graphite/http-api/
+
+### Example Grafana Dashboard feeded by this package
+
+![Dashboard Screenshot Example](./docs/screenshot.webp)
 
 ### Installation
 
@@ -97,7 +102,7 @@ gauge.dec(50);
 
 ### Use metrics on Grafana Dashboard
 
-![Dashboard Screenshot Example](./docs/dashboardscreenshot.png)
+![Dashboard Screenshot Example](./docs/screenshot.webp)
 
 ### License
 
