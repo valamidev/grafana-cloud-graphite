@@ -8,7 +8,7 @@ https://grafana.com/docs/grafana-cloud/monitor-infrastructure/metrics/metrics-gr
 
 ### Example Grafana Dashboard feeded by this package
 
-![Dashboard Screenshot Example](./docs/screenshot.webp)
+![Dashboard Screenshot Example](https://github.com/valamidev/grafana-cloud-graphite/blob/main/docs/screenshot.webp)
 
 ### Installation
 
