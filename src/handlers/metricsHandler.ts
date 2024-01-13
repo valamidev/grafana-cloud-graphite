@@ -55,6 +55,30 @@ export class GraphiteMetrics extends EventEmitter {
     return metrics;
   }
 
+  public async sendMetric(
+    name: string,
+    interval: number,
+    value: number,
+    time?: number,
+    tags?: Record<string, string>
+  ): Promise<void> {
+    const data: MetricSchema = {
+      name: this.options.namespace ? `${this.options.namespace}.${name}` : name,
+      interval,
+      value,
+      time: time ?? Date.now(),
+      tags,
+    };
+
+    try {
+      await this.httpHandler.sendMetrics(data);
+    } catch (error) {
+      this.emit("error", error);
+    } finally {
+      return;
+    }
+  }
+
   public registerGauge(
     name: string,
     interval: number,
