@@ -34,6 +34,11 @@ describe("GraphiteGauge", () => {
     expect(gauge.get()[0].value).toEqual(5);
   });
 
+  it("should decrement the count by a given value", () => {
+    gauge.set(10);
+    expect(gauge.get()[0].value).toEqual(10);
+  });
+
   it("should not decrement the count when given a value of 0", () => {
     gauge.inc(10);
     gauge.dec(0);
