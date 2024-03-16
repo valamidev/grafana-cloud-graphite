@@ -35,6 +35,7 @@ export interface Counter extends IntervalMetrics {
 
 export interface Gauge extends IntervalMetrics {
   inc(value?: number): void;
+  set(value?: number): void;
   dec(value?: number): void;
 }
 

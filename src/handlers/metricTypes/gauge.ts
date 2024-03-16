@@ -27,6 +27,10 @@ export class GraphiteGauge implements Gauge {
     return data;
   }
 
+  set(value?: number): void {
+    this.count = value || 0;
+  }
+
   inc(value?: number): void {
     if (value === 0) {
       return;
