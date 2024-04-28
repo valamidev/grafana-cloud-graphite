@@ -1,5 +1,5 @@
 import { MetricSchema, Stats } from "../../types";
-import { calcMedian } from "../../utils";
+import { calcMedian, calculateAverage } from "../../utils";
 
 export class GraphiteStats implements Stats {
   private count = 0;
@@ -11,13 +11,9 @@ export class GraphiteStats implements Stats {
     public readonly tags?: Record<string, string>
   ) {}
 
-  private calculateAverage(values: number[]): number {
-    return values.reduce((a, b) => a + b, 0) / values.length;
-  }
-
   get(): MetricSchema[] {
     const median = calcMedian(this.values);
-    const avg = this.calculateAverage(this.values);
+    const avg = calculateAverage(this.values);
 
     const time = Date.now();
 

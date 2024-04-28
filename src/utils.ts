@@ -8,3 +8,9 @@ export const calcMedian = (arr: number[]): number | undefined => {
   const mid = Math.floor(s.length / 2);
   return s.length % 2 === 0 ? (s[mid - 1] + s[mid]) / 2 : s[mid];
 };
+
+export const calculateAverage = (arr: number[]): number => {
+  return arr.length
+    ? arr.reduce((a, b) => a + b, 0) / arr.length
+    : 0;
+};
