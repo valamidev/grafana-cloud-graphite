@@ -1,9 +1,10 @@
 import { GraphiteStats } from "../src/handlers/metricTypes/stats";
-import { calcMedian } from "../src/utils";
+import { calcMedian, calculateAverage } from "../src/utils";
 
 // Mock calcMedian function if needed
 jest.mock("../src/utils", () => ({
   calcMedian: jest.fn(),
+  calculateAverage: jest.fn(),
 }));
 
 describe("GraphiteStats", () => {
@@ -22,18 +23,11 @@ describe("GraphiteStats", () => {
     expect(graphiteStats).toHaveProperty("interval", 1);
   });
 
-  it("should calculate average correctly", () => {
-    const spy = jest.spyOn(graphiteStats, "calculateAverage");
-    graphiteStats.add(2);
-    graphiteStats.add(4);
-    graphiteStats.add(6);
-    const average = graphiteStats.calculateAverage(graphiteStats["values"]);
-    expect(average).toEqual(4);
-    expect(spy).toHaveBeenCalledWith(graphiteStats["values"]);
-  });
-
   it("should get metrics correctly", () => {
     (calcMedian as jest.MockedFunction<typeof calcMedian>).mockReturnValue(3);
+    (
+      calculateAverage as jest.MockedFunction<typeof calculateAverage>
+    ).mockReturnValue(2);
     graphiteStats.add(1);
     graphiteStats.add(2);
     graphiteStats.add(3);
